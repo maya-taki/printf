@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 14:26:44 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/08/08 20:27:23 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/08/27 17:04:40 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/08/27 17:06:12 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_isalnum(int c)
+int	ft_putstr(char *s)
 {
-	while ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9'))
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!s)
+	{
+		return (write(1, "(null)", 6));
+	}
+	while (s[i] != '\0')
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+	return (i);
 }

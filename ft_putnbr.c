@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 14:27:03 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/07/31 17:40:34 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/08/27 17:04:56 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/08/27 17:05:38 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_putnbr(int n)
 {
-	size_t	i;
+	int	count;
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n)
+	count = 0;
+	if (n == -2147483648)
 	{
-		if (s1[i] == '\0' || s2[i] == '\0')
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		count += write(1, "-2147483648", 11);
+		return (count);
 	}
-	return (0);
+	while (n < 0)
+	{
+		count += ft_putchar('-');
+		n = -n;
+	}
+	if (n / 10)
+		count += ft_putnbr(n / 10);
+	count += ft_putchar(n % 10 + '0');
+	return (count);
 }

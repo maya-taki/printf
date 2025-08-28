@@ -6,13 +6,13 @@
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:29:16 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/08/26 19:59:44 by mtakiyos         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:03:10 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_printf_args(char c, va_list args)
+int	ft_printf_args(char c, va_list args)
 {
 	if (c == '%')
 		return (ft_putchar('%'));
@@ -21,25 +21,39 @@ static int	ft_printf_args(char c, va_list args)
 	else if (c == 'd' || c == 'i')
 		return (ft_putnbr(va_arg(args, int)));
 	else if (c == 'u')
-		return (ft_putuns());
+		return (ft_printuns(10, "0123456789", va_arg(args, unsigned int)));
 	else if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'p')
-		return (ft_putptr());
+		return (ft_printptr(va_arg(args, unsigned long)));
 	else if (c == 'x' || c == 'X')
-	{
-		if (c == 'x')
-			return ();
-		else
-			return ();
-	}
+		return (ft_printhex(va_arg(args, unsigned int), c));
 	else
 		return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
+	int		count;
 	size_t	i;
-	va_list args;
+	va_list	args;
+
+	count = 0;
+	i = 0;
 	va_start(args, format);
+	while (format[i] != '\0')
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			count += ft_printf_args(format[i], args);
+			i++;
+		}
+		else
+		{
+			count += ft_putchar(format[i]);
+			i++;
+		}
+	}
+	return (count);
 }

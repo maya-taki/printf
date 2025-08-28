@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_printuns.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 14:27:01 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/07/23 13:19:56 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/08/27 17:04:07 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/08/27 17:07:12 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_printuns(unsigned int base, char *basestr, unsigned int n)
 {
-	size_t	i;
+	int	count;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	count = 0;
+	if (n / base)
+		count += ft_printuns(base, basestr, n / base);
+	count += ft_putchar(basestr[n % base]);
+	return (count);
 }

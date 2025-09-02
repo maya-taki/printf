@@ -5,47 +5,34 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/26 12:31:09 by mtakiyos          #+#    #+#              #
-#    Updated: 2025/09/02 16:52:27 by mtakiyos         ###   ########.fr        #
+#    Created: 2025/07/22 13:33:20 by mtakiyos          #+#    #+#              #
+#    Updated: 2025/09/02 15:15:44 by mtakiyos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME	= libft.a
+CFLAGS	= -Wextra -Werror -Wall
+SRCS	=	ft_printhex.c \
+			ft_printptr.c \
+			ft_printuns.c \
+			ft_putchar.c \
+			ft_putnbr.c \
+			ft_putstr.c \
+				
+OBJS =	$(SRCS:.c=.o)
+	
+all:	$(NAME)
 
-SRCS = 	srcs/ft_printhex.c \
-		srcs/ft_printuns.c \
-		srcs/ft_putchar.c \
-		srcs/ft_putnbr.c \
-		srcs/ft_putstr.c \
-		srcs/ft_printptr.c \
-		ft_printf.c 
-
-FLAGS = -Wall -Werror -Wextra
-
-OBJS = $(SRCS:.c=.o)
-
-RM = rm -f
-
-END = \033[0m
-RED = \033[31m
-GREEN = \033[32m
-
-$(NAME): $(OBJS)
-	ar rcs $@ $^
+${NAME}: ${OBJS}
+	ar crs $@ $^
 
 %.o:%.c
-	@printf "$(GREEN)[Compiling]$(END) %s$(END)\n" "$(notdir $(<))"
-	@cc $(FLAGS) -c $^ -o $@
+	cc ${CFLAGS} -c $^ -o $@
 
-all: $(NAME)
-
-clean: 
-	@printf "$(RED)[Removing files]$(END) %s$(END)\n" "$(notdir $(<))"
-	@$(RM) $(OBJS)
+clean:	
+	rm -f $(OBJS)
 
 fclean:	clean
-	@$(RM) $(NAME)
+	rm -f ${NAME}
 
 re:	fclean all
-
-.PHONY:	all	fclean	clean	re

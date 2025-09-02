@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printhex.c                                      :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 17:04:17 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/08/27 17:06:53 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/07/31 17:42:57 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/09/02 15:15:51 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef LIBFT_H
+# define LIBFT_H
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
-int	ft_printhex(unsigned int n, int flag)
-{
-	int	count;
+int	ft_printhex(unsigned int n, int flag);
+int	ft_printunl(int base, char *basestr, unsigned long n);
+int	ft_printptr(unsigned long ptr);
+int	ft_printuns(unsigned int base, char *basestr, unsigned int n);
+int	ft_putchar(int c);
+int	ft_putnbr(int n);
+int	ft_putstr(char *s);
 
-	count = 0;
-	if (flag == 'x')
-	{
-		count += ft_printuns(16, "0123456789abcdef", n);
-	}
-	else
-	{
-		count += ft_printuns(16, "0123456789ABCDEF", n);
-	}
-	return (count);
-}
+#endif

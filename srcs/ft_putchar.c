@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printuns.c                                      :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 17:04:07 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/08/27 17:07:12 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/08/27 17:03:56 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/09/02 15:17:04 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printuns(unsigned int base, char *basestr, unsigned int n)
+int	ft_putchar(int c)
 {
-	int	count;
-
-	count = 0;
-	if (n / base)
-		count += ft_printuns(base, basestr, n / base);
-	count += ft_putchar(basestr[n % base]);
-	return (count);
+	write(1, &c, 1);
+	return (1);
 }

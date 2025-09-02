@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printptr.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtakiyos <mtakiyos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 17:06:31 by mtakiyos          #+#    #+#             */
-/*   Updated: 2025/08/27 17:06:33 by mtakiyos         ###   ########.fr       */
+/*   Created: 2025/08/27 17:04:56 by mtakiyos          #+#    #+#             */
+/*   Updated: 2025/09/02 15:17:06 by mtakiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printunl(int base, char *basestr, unsigned long n)
+int	ft_putnbr(int n)
 {
 	int	count;
 
 	count = 0;
-	if (n / base)
-		count += ft_printunl(base, basestr, n / base);
-	count += ft_putchar(basestr[n % base]);
-	return (count);
-}
-
-int	ft_printptr(unsigned long ptr)
-{
-	int	count;
-
-	if (!ptr)
-		return (write(1, "(nil)", 5));
-	count = 0;
-	count += write(1, "0x", 2);
-	count += ft_printunl(16, "0123456789abcdef", ptr);
+	if (n == -2147483648)
+	{
+		count += write(1, "-2147483648", 11);
+		return (count);
+	}
+	while (n < 0)
+	{
+		count += ft_putchar('-');
+		n = -n;
+	}
+	if (n / 10)
+		count += ft_putnbr(n / 10);
+	count += ft_putchar(n % 10 + '0');
 	return (count);
 }
